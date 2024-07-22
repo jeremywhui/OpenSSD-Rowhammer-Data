@@ -1,10 +1,13 @@
 # OpenSSD-Rowhammer-Data
-Repository of documentation and data files for the Princeton-Intel REU '24.
+Repository of documentation and data files for the "Performing Rowhammer-like Attacks on OpenSSD NAND Flash " project completed at the Princeton-Intel REU '24.
+
+For a more high level description, please view [the slides for this project](https://docs.google.com/presentation/d/1VuKDGHRU1CSy5wz2qb5-6ENMViEKH8YWHjf_TMDVi7Q/edit?usp=sharing).
 
 - [Introduction](#introduction)
 - [Project Setup](#project-setup)
     - [`nand_playground.c` Setup](#nand_playgroundc-setup)
 - [Basic Operations](#basic-operations)
+- [Playground Tasks](#playground-tasks)
 - [Future Work](#future-work)
 - [References](#references)
 
@@ -16,17 +19,75 @@ The program initially runs `main.c`, which calls `nvme_main.c` to initialize the
 
 ### `nand_playground.c` Setup
 This file is begins with many basic flash operations in seperate methods, as well as many "playground tasks" to run various experiments to test the effects of Rowhammer on Flash. To test these operations separately, it is preferred to set the following line to have a `playground_task` of `PLAY_INTERACTIVE`:
-
 ```c
 playground_task play_task = PLAY_INTERACTIVE;
 ```
-These operations will be further described in [Basic Operations](#basic-operations).
+These operations will be further described in [Basic Operations](#basic-operations). Further playground tasks are discussed in [Playground Tasks](#playground-tasks).
 
 ## Basic Operations
-TK
+
+`q` - quits the program.
+
+`r <die number> <block number> <page number> <column number>` - reads from the specified page in the specified block in the specified die, starting from the specified column number. Generally `<column number>` should be set to 0. 
+
+`w <die number> <block number> <page number> <column number>` - write
+
+`e` - erase
+
+`d` - delay
+
+
+## Playground Tasks
+\*Note that only the Playground Tasks related to running the Rowhammer experiments will be described below.
+
+### PLAY_WRITE
+
+### PLAY_WRITE_PATTERN
+
+### PLAY_READ
+
+### PLAY_REPEATED_READ
+
+### PLAY_REPEATED_WRITE
+
+### PLAY_ECC_SANITY
+
+### PLAY_FIND_MAPPING
+
+### PLAY_FIND_MAPPING_MULTIBLOCK
+
+### PLAY_FIND_MAPPING_ECC
+
+### PLAY_TEST_ECC_THRESHOLD
+
+### PLAY_HAMMER
+
+### PLAY_BYPASS_QUEUE_READ
+
+### PLAY_MULTIPLANE
+
+### PLAY_INTERACTIVE
+
+### PLAY_TIME_READS
+
+### PLAY_WRITE_PACKS
+
+### PLAY_ERASE
+Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, then waits for the channel to be ready. 
+
+### PLAY_COLWISE_PACKING
+
+### RUN_BCD2BIN
+
+### RUN_BFSBULK
 
 ## Future Work
-TK
+- Examine Flash Translation Layer (FTL) software
+    - Further understand mapping
+    - Examine request scheduling
+- Research mitigations to full-system attacks
+- Limit hammering effects to only victim and aggressor pages
+- Lower minimum number of bits required for hammering effects
 
 ## References
 Anil Kurmus, Nikolas Ioannou, Matthias Neugschwandtner, Nikolaos Papandreou, and Thomas Parnell. 2017. From random block corruption to privilege escalation: a filesystem attack vector for rowhammer-like attacks. In Proceedings of the 11th USENIX Conference on Offensive Technologies (WOOT'17). USENIX Association, USA, 4.
