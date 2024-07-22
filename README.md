@@ -77,10 +77,6 @@ Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, 
 
 ### PLAY_COLWISE_PACKING
 
-### RUN_BCD2BIN
-
-### RUN_BFSBULK
-
 ## Future Work
 - Examine Flash Translation Layer (FTL) software
     - Further understand mapping
