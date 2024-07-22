@@ -40,15 +40,15 @@ These operations will be further described in [Basic Operations](#basic-operatio
 ## Playground Tasks
 \*Note that only the Playground Tasks related to running the Rowhammer experiments will be described below.
 
-### PLAY_WRITE
-
 ### PLAY_WRITE_PATTERN
 
 ### PLAY_READ
 
 ### PLAY_REPEATED_READ
+Repeatedly reads from a given die, block, page and columns a large number of times and checks for any errors that may be present. As of now read disturbance errors have not yet been found through repeated reads.
 
 ### PLAY_REPEATED_WRITE
+Repeatedly reads from a given die, block, page and columns a large number of times and (optionally) checks for any errors that may be present. This Playground Task is sufficient to induce Rowhammer effects, however, it may be preferable to use [PLAY_HAMMER](#play_hammer) to view the number of resulting errors from writing various numbers of times.
 
 ### PLAY_ECC_SANITY
 
