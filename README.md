@@ -1,5 +1,5 @@
 # OpenSSD-Rowhammer-Data
-Repository of documentation and data files for the "Performing Rowhammer-like Attacks on OpenSSD NAND Flash " project completed at the Princeton-Intel REU '24.
+Repository of documentation and data files for the "Performing Rowhammer-like Attacks on OpenSSD NAND Flash" project completed at the Princeton-Intel REU '24.
 
 For a more high level description, please view [the slides for this project](https://docs.google.com/presentation/d/1VuKDGHRU1CSy5wz2qb5-6ENMViEKH8YWHjf_TMDVi7Q/edit?usp=sharing).
 
@@ -12,7 +12,12 @@ For a more high level description, please view [the slides for this project](htt
 - [References](#references)
 
 ## Introduction
-TK
+This project aims to answer the following three questions:
+1. Can Rowhammer be performed on 3D NAND Flash?
+2. If so, how can Rowhammer be controlled and leveraged?
+3. Can Rowhammer be used to bypass Error Correction Codes (ECC)?
+
+The experimental setup of this project uses the Daisy+ OpenSSD Micron 4C2W LPDDR4 board, which serves to be a convenient experimental board for testing various experiments. This setup is interfaced using C microcode and Verilog HDL.
 
 ## Project Setup
 The program initially runs `main.c`, which calls `nvme_main.c` to initialize the FTL as well as containing other tasks for NVMe. This file also calls `nand_playground.c` and is where almost all experiments for this project are run.
