@@ -39,8 +39,27 @@ These operations will be further described in [Basic Operations](#basic-operatio
 
 `e` - erase
 
+`c` -  
+
+`p` - applies a given pattern
+
+`h` - hammer
+
 `d` - delay
 
+`o` - reads from the specified page in the specified block in the specified die, starting from the specified column number like `r`, but instead only reads the next 24 words.
+
+`1` - erases the block, equivalent to the `e` command
+
+`2` -
+
+`3` -
+
+`4` -
+
+`5` -
+
+`6` -
 
 ## Playground Tasks
 \*Note that only the Playground Tasks related to running the Rowhammer experiments will be described below.
@@ -67,20 +86,15 @@ Repeatedly reads from a given die, block, page and columns a large number of tim
 
 ### PLAY_HAMMER
 
+### PLAY_HAMMER_READS
+
 ### PLAY_BYPASS_QUEUE_READ
 
-### PLAY_MULTIPLANE
-
 ### PLAY_INTERACTIVE
-
-### PLAY_TIME_READS
-
-### PLAY_WRITE_PACKS
+Allows for basic operations to be tested separately through a command-line interface.
 
 ### PLAY_ERASE
 Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, then waits for the channel to be ready. 
-
-### PLAY_COLWISE_PACKING
 
 ## Future Work
 - Examine Flash Translation Layer (FTL) software
@@ -92,6 +106,8 @@ Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, 
 
 ## References
 Anil Kurmus, Nikolas Ioannou, Matthias Neugschwandtner, Nikolaos Papandreou, and Thomas Parnell. 2017. From random block corruption to privilege escalation: a filesystem attack vector for rowhammer-like attacks. In Proceedings of the 11th USENIX Conference on Offensive Technologies (WOOT'17). USENIX Association, USA, 4.
+
+"L05B_128-256-512Gb_MLC_Fortis_Flash_NAND", NAND Flash Memory - Fortis Flash
 
 Laura M. Grupp, Adrian M. Caulfield, Joel Coburn, Steven Swanson, Eitan Yaakobi, Paul H. Siegel, and Jack K. Wolf. 2009. Characterizing flash memory: anomalies, observations, and applications. In Proceedings of the 42nd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO 42). Association for Computing Machinery, New York, NY, USA, 24–33. https://doi.org/10.1145/1669112.1669118
 
