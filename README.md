@@ -9,6 +9,7 @@ For a more high level description, please view [the slides for this project](htt
 - [Basic Operations](#basic-operations)
 - [Playground Tasks](#playground-tasks)
 - [Future Work](#future-work)
+- [Video Demos](#video-demos)
 - [References](#references)
 
 ## Introduction
