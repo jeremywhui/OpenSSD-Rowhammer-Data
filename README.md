@@ -39,7 +39,7 @@ These operations will be further described in [Basic Operations](#basic-operatio
 
 `e` - erase
 
-`c` -  
+`c` -  counts the total number of errors and the number of pages with errors in a specified block, checked against a specified pattern.
 
 `p` - applies a given pattern
 
@@ -51,22 +51,18 @@ These operations will be further described in [Basic Operations](#basic-operatio
 
 `1` - erases the block, equivalent to the `e` command
 
-`2` -
+`2` - reads with ECC decoding from a specified page
 
-`3` -
+`3` - writes with ECC encoding to a specified page
 
-`4` -
+`4` - writes all 1s with ECC encoding to all pages in a block. If the block is erased, the command simply encodes the contents
 
-`5` -
+`5` - writes 1s up to a certain column in a page, then 0s for the rest of the page
 
-`6` -
+`6` - hammers all 0s to a specified page
 
 ## Playground Tasks
 \*Note that only the Playground Tasks related to running the Rowhammer experiments will be described below.
-
-### PLAY_WRITE_PATTERN
-
-### PLAY_READ
 
 ### PLAY_REPEATED_READ
 Repeatedly reads from a given die, block, page and columns a large number of times and checks for any errors that may be present. As of now read disturbance errors have not yet been found through repeated reads.
@@ -77,19 +73,17 @@ Repeatedly reads from a given die, block, page and columns a large number of tim
 ### PLAY_ECC_SANITY
 
 ### PLAY_FIND_MAPPING
-
+Iterates through each page and hammers, counts number of errors in each page and reports total number of pages with errors. Does not increment block.
 ### PLAY_FIND_MAPPING_MULTIBLOCK
-
+Same as PLAY_FIND_MULTIBLOCK but increments the block and erases before hammering. Counts number of errors for each iteration both before and after hammering.
 ### PLAY_FIND_MAPPING_ECC
-
+Same as PLAY_FIND_MAPPING_MULTIBLOCK but with ECC write and read functions. 
 ### PLAY_TEST_ECC_THRESHOLD
-
+Write specified amount of 0s using ECC write to page. Then read and see if corrections were made.
 ### PLAY_HAMMER
-
+Performs several iterations of hammering with exponentially increasing amounts of hammering, from 1 to 1048576. Count total number of errors in the block for each iteration. 
 ### PLAY_HAMMER_READS
-
-### PLAY_BYPASS_QUEUE_READ
-
+Same as PLAY_HAMMER but with read operations.
 ### PLAY_INTERACTIVE
 Allows for basic operations to be tested separately through a command-line interface.
 
