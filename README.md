@@ -97,7 +97,13 @@ Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, 
 - Research mitigations to full-system attacks
 - Limit hammering effects to only victim and aggressor pages
 - Lower minimum number of bits required for hammering effects
-
+## Video Demos
+- Cell targeted attack demos:
+    - [Before hammering](https://drive.google.com/file/d/1jyn__EOjHA94RQtv2eHecDY3mRCNFb0E/view?usp=sharing)
+    - [After hammering](https://drive.google.com/file/d/1SDJu3W-H8YpoyQU7D9pafaBuRR_XP6xB/view?usp=sharing)
+- ECC attack demo:
+    - [Before hammering](https://drive.google.com/file/d/1fMg7ExPKXOX3ifcKE7bsS4wqp9k2S2NB/view?usp=sharing)
+    - [After hammering](https://drive.google.com/file/d/1_FkIkBRxCkiKDO84wvBTinXbO_T_v0xA/view?usp=sharing)
 ## References
 Anil Kurmus, Nikolas Ioannou, Matthias Neugschwandtner, Nikolaos Papandreou, and Thomas Parnell. 2017. From random block corruption to privilege escalation: a filesystem attack vector for rowhammer-like attacks. In Proceedings of the 11th USENIX Conference on Offensive Technologies (WOOT'17). USENIX Association, USA, 4.
 
