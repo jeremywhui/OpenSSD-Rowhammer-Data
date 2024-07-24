@@ -36,7 +36,7 @@ These operations will be further described in [Basic Operations](#basic-operatio
 
 `r <die> <block> <page> <column>` - reads from the specified page in the specified block in the specified die, starting from the specified column. Generally `<column>` should be set to 0. 
 
-`w <die> <block> <page> <column>` - write
+`w <die> <block> <page>` - writes the first 64 columns to have the first bit flipped to 0 (2147483647 in decimal), and all other columns as all 1's (4294967295 in decimal) at the specified die, block, and page.
 
 `e <die> <block>` - erases a specified block in a specified die.
 
@@ -44,7 +44,7 @@ These operations will be further described in [Basic Operations](#basic-operatio
 
 `p <die> <block> <page> <column> <pattern>` - applies a given pattern.
 
-`h <die> <block> <page>` - hammer.
+`h <die> <block> <page>` - hammers the first 64 columns to have the first bit flipped to 0 (2147483647 in decimal), and all other columns as all 1's (4294967295 in decimal) by repeatedly writing this pattern 1048576 times. Executes this process at the specified die, block, and page.
 
 `d` - performs a delay for 10 seconds. Used as a sanity check when performing Rowhammer in order to ensure bit flips do not occur from waiting.
 
