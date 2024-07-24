@@ -34,33 +34,33 @@ These operations will be further described in [Basic Operations](#basic-operatio
 
 `q` - quits the program.
 
-`r <die number> <block number> <page number> <column number>` - reads from the specified page in the specified block in the specified die, starting from the specified column number. Generally `<column number>` should be set to 0. 
+`r <die> <block> <page> <column>` - reads from the specified page in the specified block in the specified die, starting from the specified column. Generally `<column>` should be set to 0. 
 
-`w <die number> <block number> <page number> <column number>` - write
+`w <die> <block> <page> <column>` - write
 
-`e` - erase
+`e <die> <block>` - erases a specified block in a specified die.
 
-`c` -  counts the total number of errors and the number of pages with errors in a specified block, checked against a specified pattern.
+`c <die> <block> <page> <column> <pattern>` -  counts the total number of errors and the number of pages with errors in a specified block, checked against a specified pattern.
 
-`p` - applies a given pattern
+`p <die> <block> <page> <column> <pattern>` - applies a given pattern.
 
-`h` - hammer
+`h <die> <block> <page>` - hammer.
 
-`d` - delay
+`d` - performs a delay for 10 seconds. Used as a sanity check when performing Rowhammer in order to ensure bit flips do not occur from waiting.
 
-`o` - reads from the specified page in the specified block in the specified die, starting from the specified column number like `r`, but instead only reads the next 24 words.
+`o <die> <block> <page> <column>` - reads from the specified page in the specified block in the specified die, starting from the specified column number like `r`, but instead only reads the next 24 words.
 
-`1` - erases the block, equivalent to the `e` command
+`1 <die> <block>` - erases the block, equivalent to the `e` command.
 
-`2` - reads with ECC decoding from a specified page
+`2 <die> <block> <page> <column>` - reads with ECC decoding from a specified page.
 
-`3` - writes with ECC encoding to a specified page
+`3` - writes with ECC encoding to a specified page.
 
-`4` - writes all 1s with ECC encoding to all pages in a block. If the block is erased, the command simply encodes the contents
+`4 <die> <block> <page>` - writes all 1s with ECC encoding to all pages in a block. If the block is erased, the command simply encodes the contents.
 
-`5` - writes 1s up to a certain column in a page, then 0s for the rest of the page
+`5 <die> <block> <page> <column>` - writes 1s up to a specified column in a page, then 0s for the rest of the page.
 
-`6` - hammers all 0s to a specified page
+`6 <die> <block> <page>` - hammers all 0s to a specified page.
 
 ## Playground Tasks
 \*Note that only the Playground Tasks related to running the Rowhammer experiments will be described below.
@@ -70,8 +70,6 @@ Repeatedly reads from a given die, block, page and columns a large number of tim
 
 ### PLAY_REPEATED_WRITE
 Repeatedly reads from a given die, block, page and columns a large number of times and (optionally) checks for any errors that may be present. This Playground Task is sufficient to induce Rowhammer effects, however, it may be preferable to use [PLAY_HAMMER](#play_hammer) to view the number of resulting errors from writing various numbers of times.
-
-### PLAY_ECC_SANITY
 
 ### PLAY_FIND_MAPPING
 Iterates through each page and hammers, counts number of errors in each page and reports total number of pages with errors. Does not increment block.
@@ -108,9 +106,11 @@ Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, 
 ## References
 Anil Kurmus, Nikolas Ioannou, Matthias Neugschwandtner, Nikolaos Papandreou, and Thomas Parnell. 2017. From random block corruption to privilege escalation: a filesystem attack vector for rowhammer-like attacks. In Proceedings of the 11th USENIX Conference on Offensive Technologies (WOOT'17). USENIX Association, USA, 4.
 
-"L05B_128-256-512Gb_MLC_Fortis_Flash_NAND", NAND Flash Memory - Fortis Flash
+David Harris and Sarah Harris. 2012. Digital Design and Computer Architecture, Second Edition (2nd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
 
 Laura M. Grupp, Adrian M. Caulfield, Joel Coburn, Steven Swanson, Eitan Yaakobi, Paul H. Siegel, and Jack K. Wolf. 2009. Characterizing flash memory: anomalies, observations, and applications. In Proceedings of the 42nd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO 42). Association for Computing Machinery, New York, NY, USA, 24–33. https://doi.org/10.1145/1669112.1669118
+
+Micron, NAND Flash Memory - Fortis Flash
 
 Rino Micheloni, Alessia Marelli, and Kam Eshghi. 2012. Inside Solid State Drives (SSDs). Springer Publishing Company, Incorporated.
 
