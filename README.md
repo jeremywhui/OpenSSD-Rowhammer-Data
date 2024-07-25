@@ -13,13 +13,15 @@ For a more high level description, please view [the slides for this project](htt
 - [Video Demos](#video-demos)
 - [References](#references)
 
+Note that this work builds off of the work provided in this repository: https://github.com/CRZ-Technology/OpenSSD-OpenChannelSSD/tree/main/DaisyPlus/OpenSSD/Micron_NAND/daisyplus_openssd_micron_4c2w_lpddr4/cosm-plus-sys.
+
 ## Introduction
 This project aims to answer the following three questions:
 1. Can Rowhammer be performed on 3D NAND Flash?
 2. If so, how can Rowhammer be controlled and leveraged?
 3. Can Rowhammer be used to bypass Error Correction Codes (ECC)?
 
-The experimental setup of this project uses the Daisy+ OpenSSD Micron 4C2W LPDDR4 board, which serves to be a convenient experimental board for testing various experiments. This setup is interfaced using C microcode and Verilog HDL.
+The experimental setup of this project uses the Daisy+ OpenSSD Micron 4C2W LPDDR4 board, which serves to be a convenient experimental board for testing various experiments. This setup is interfaced using C and Verilog HDL.
 
 ## Project Setup
 The program initially runs `main.c`, which calls `nvme_main.c` to initialize the FTL as well as containing other tasks for NVMe. This file also calls `nand_playground.c` and is where almost all experiments for this project are run.
@@ -76,10 +78,10 @@ Repeatedly reads from a given die, block, page and columns a large number of tim
 Iterates through each page and hammers, counts number of errors in each page and reports total number of pages with errors. Does not increment block.
 
 ### PLAY_FIND_MAPPING_MULTIBLOCK
-Same as PLAY_FIND_MAPPING but increments the block and erases before hammering. Counts number of errors for each iteration both before and after hammering.
+Same as [PLAY_FIND_MAPPING](#play_find_mapping) but increments the block and erases before hammering. Counts number of errors for each iteration both before and after hammering.
 
 ### PLAY_FIND_MAPPING_ECC
-Same as PLAY_FIND_MAPPING_MULTIBLOCK but with ECC write and read functions. 
+Same as [PLAY_FIND_MAPPING_MULTIBLOCK](#play_find_mapping_multiblock) but with ECC write and read functions. 
 
 ### PLAY_TEST_ECC_THRESHOLD
 Write specified amount of 0s using ECC write to page. Then read and see if corrections were made.
@@ -88,7 +90,7 @@ Write specified amount of 0s using ECC write to page. Then read and see if corre
 Performs several iterations of hammering with exponentially increasing amounts of hammering, from 1 to 1048576. Count total number of errors in the block for each iteration. 
 
 ### PLAY_HAMMER_READS
-Same as PLAY_HAMMER but with read operations.
+Same as [PLAY_HAMMER](#play_hammer) but with read operations.
 
 ### PLAY_INTERACTIVE
 Allows for basic operations to be tested separately through a command-line interface.
@@ -106,7 +108,7 @@ Procedure:
 3. Count number of errors in page 8
 4. Increase amount of hammering, repeat
 
-To avoid erasing single block repeatedly, index of block being used was incremented on each trial. Amount of hammering ranged from 2^0 to 2^20, multiplying by 2 each iteration.
+To avoid erasing single block repeatedly, index of block being used was incremented on each trial. Amount of hammering ranged from $2^0$ to $2^{20}$, multiplying by 2 each iteration.
 
 Results:
 ![Initial Rowhammer Characterization](InitialCharacterization.png)
@@ -121,11 +123,11 @@ Observed higher temperatures yielding more errors
 
 #### Wait time removal
 
-Analyzed effect of removing wait_channel_ready() call between writes.
+Analyzed effect of removing `wait_channel_ready()` calls between writes.
 
 ![No wait](NoWait.png)
 
-Removing wait command yields less induced bit flips. Likely that not all of the writes are going through since the channel may not be ready. 
+Removing wait commands yields less induced bit flips. It is likely that not all of the writes are going through since the channel may not be ready. 
 
 ## Future Work
 - Examine Flash Translation Layer (FTL) software
@@ -150,7 +152,7 @@ David Harris and Sarah Harris. 2012. Digital Design and Computer Architecture, S
 
 Laura M. Grupp, Adrian M. Caulfield, Joel Coburn, Steven Swanson, Eitan Yaakobi, Paul H. Siegel, and Jack K. Wolf. 2009. Characterizing flash memory: anomalies, observations, and applications. In Proceedings of the 42nd Annual IEEE/ACM International Symposium on Microarchitecture (MICRO 42). Association for Computing Machinery, New York, NY, USA, 24–33. https://doi.org/10.1145/1669112.1669118
 
-Micron, NAND Flash Memory - Fortis Flash
+Micron, "NAND Flash Memory - Fortis Flash"
 
 Rino Micheloni, Alessia Marelli, and Kam Eshghi. 2012. Inside Solid State Drives (SSDs). Springer Publishing Company, Incorporated.
 
