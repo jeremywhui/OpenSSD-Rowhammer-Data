@@ -76,7 +76,7 @@ Repeatedly reads from a given die, block, page and columns a large number of tim
 Iterates through each page and hammers, counts number of errors in each page and reports total number of pages with errors. Does not increment block.
 
 ### PLAY_FIND_MAPPING_MULTIBLOCK
-Same as PLAY_FIND_MULTIBLOCK but increments the block and erases before hammering. Counts number of errors for each iteration both before and after hammering.
+Same as PLAY_FIND_MAPPING but increments the block and erases before hammering. Counts number of errors for each iteration both before and after hammering.
 
 ### PLAY_FIND_MAPPING_ECC
 Same as PLAY_FIND_MAPPING_MULTIBLOCK but with ECC write and read functions. 
@@ -97,6 +97,35 @@ Allows for basic operations to be tested separately through a command-line inter
 Uses the `V2FEraseBlockAsync()` function to erase the given block at channel 0, then waits for the channel to be ready. 
 
 ## Experiments
+### Rowhammer Characterization
+Aimed to quantify relationship between amount of hammering and amount of induced bit flips. 
+
+Procedure:
+1. Erase block
+2. Hammer page 0 set amount of times
+3. Count number of errors in page 8
+4. Increase amount of hammering, repeat
+
+To avoid erasing single block repeatedly, index of block being used was incremented on each trial. Amount of hammering ranged from 2^0 to 2^20, multiplying by 2 each iteration.
+
+Results:
+![Initial Rowhammer Characterization](InitialCharacterization.png)
+
+#### Temperature Characterization
+
+Aimed to observe relationship between temperature and rowhammer-induced bit flips. Graph shown below at 80&deg;C.
+
+![Temperature Characterization](TemperatureCharacterization.png)
+
+Observed higher temperatures yielding more errors
+
+#### Wait time removal
+
+Analyzed effect of removing wait_channel_ready() call between writes.
+
+![No wait](NoWait.png)
+
+Removing wait command yields less induced bit flips. Likely that not all of the writes are going through since the channel may not be ready. 
 
 ## Future Work
 - Examine Flash Translation Layer (FTL) software
